@@ -1,5 +1,9 @@
 Changelog file for Cron Manager component.
 
+Cron Manager 1.1.1-beta
+====================================
+- Fixed pagination when purging logs
+
 Cron Manager 1.1.0-pl
 ====================================
 - Fixed some UI stuff
