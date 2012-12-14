@@ -41,6 +41,7 @@ $_lang['cronmanager.log'] = "Logs for cronjob";
 $_lang['cronmanager.log.btnback'] = "Back to cronjobs";
 $_lang['cronmanager.logs'] = "Cronjob logs";
 $_lang['cronmanager.logs_desc'] = "View the logs for the selected cronjob.";
+$_lang['cronmanager.logs_entries'] = 'Logs';
 $_lang['cronmanager.log.norecords'] = "No log records found for this cronjob";
 $_lang['cronmanager.log.date'] = "Logdate";
 $_lang['cronmanager.log.message'] = "Log message";

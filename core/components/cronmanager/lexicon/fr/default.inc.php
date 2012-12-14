@@ -41,6 +41,7 @@ $_lang['cronmanager.log'] = "Logs des tâches cron";
 $_lang['cronmanager.log.btnback'] = "Retour aux tâches";
 $_lang['cronmanager.logs'] = "Logs de la tâche";
 $_lang['cronmanager.logs_desc'] = "Consultez les logs de la tâche sélectionnée.";
+$_lang['cronmanager.logs_entries'] = 'Logs';
 $_lang['cronmanager.log.norecords'] = "Aucune entrée de log pour cette tâche";
 $_lang['cronmanager.log.date'] = "Date du log";
 $_lang['cronmanager.log.message'] = "Message de log";

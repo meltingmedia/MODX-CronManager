@@ -17,7 +17,10 @@ class modCronjobGetListProcessor extends modObjectGetListProcessor {
     }
 
     public function prepareRow(xPDOObject $object) {
+        /** @var modCronJob $object */
         $objectArray = $object->toArray();
+
+        $objectArray['logs'] = $object->countLogs();
 
         if (empty($objectArray['nextrun'])) {
             $objectArray['nextrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
