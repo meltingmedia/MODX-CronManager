@@ -6,21 +6,24 @@ class modCronjobGetListProcessor extends modObjectGetListProcessor {
     public $defaultSortField = 'snippet';
     public $defaultSortDirection = 'ASC';
 
+    public function prepareQueryBeforeCount(xPDOQuery $c) {
+        $c->leftJoin('modSnippet', 'Snippet');
+        $c->select(array(
+            $this->modx->getSelectColumns($this->classKey, $this->classKey),
+            $this->modx->getSelectColumns('modSnippet', 'Snippet', 'snippet_', array('id', 'name', 'description')),
+        ));
+
+        return parent::prepareQueryBeforeCount($c);
+    }
+
     public function prepareRow(xPDOObject $object) {
         $objectArray = $object->toArray();
 
-        $objectArray['snippet_name'] = 'Unknown';
-        /** @var $snippet modSnippet */
-        $snippet = $object->getOne('Snippet');
-        if(!empty($snippet)) {
-            $objectArray['snippet_name'] = $snippet->get('name');
-        }
-
-        if(empty($objectArray['nextrun'])) {
+        if (empty($objectArray['nextrun'])) {
             $objectArray['nextrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
         }
 
-        if(empty($objectArray['lastrun'])) {
+        if (empty($objectArray['lastrun'])) {
             $objectArray['lastrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
         }
 
