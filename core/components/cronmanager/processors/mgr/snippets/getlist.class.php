@@ -9,6 +9,7 @@ class modCronjobSnippetGetListProcessor extends modSnippetGetListProcessor {
         if (!empty($query)) {
             $c->where(array(
                 'name:LIKE' => '%'.$query.'%',
+                'OR:Category.category:LIKE' => '%'.$query.'%',
             ));
         }
 
