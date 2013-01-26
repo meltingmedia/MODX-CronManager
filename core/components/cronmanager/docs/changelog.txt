@@ -1,5 +1,10 @@
 Changelog file for Cron Manager component.
 
+Cron Manager 1.1.2-beta2
+====================================
+- Ability to run a "job" from the grid
+- Prevent timeouts when there is a lot of logs
+
 Cron Manager 1.1.2-beta
 ====================================
 - Ability to filter snippets per category (combo box)
