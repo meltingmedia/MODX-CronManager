@@ -7,7 +7,12 @@ class modCronjob extends xPDOSimpleObject {
      * @return int
      */
     public function countLogs() {
-        return count($this->getMany('Log'));
+        $c = $this->xpdo->newQuery('modCronjobLog');
+        $c->where(array(
+            'cronjob' => $this->get('id'),
+        ));
+
+        return $this->xpdo->getCount('modCronjobLog', $c);
     }
 
     /**

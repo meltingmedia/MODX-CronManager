@@ -8,19 +8,20 @@ class modCronjobGetListProcessor extends modObjectGetListProcessor {
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
         $c->leftJoin('modSnippet', 'Snippet');
+        $c->leftJoin('modCronjobLog', 'Log');
         $c->select(array(
             $this->modx->getSelectColumns($this->classKey, $this->classKey),
             $this->modx->getSelectColumns('modSnippet', 'Snippet', 'snippet_', array('id', 'name', 'description')),
+            'logs' => 'COUNT(Log.id)'
         ));
+        $c->groupby($this->defaultSortField, $this->defaultSortDirection);
 
         return parent::prepareQueryBeforeCount($c);
     }
 
     public function prepareRow(xPDOObject $object) {
         /** @var modCronJob $object */
-        $objectArray = $object->toArray();
-
-        $objectArray['logs'] = $object->countLogs();
+        $objectArray = $object->toArray('', false, true);
 
         if (empty($objectArray['nextrun'])) {
             $objectArray['nextrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
