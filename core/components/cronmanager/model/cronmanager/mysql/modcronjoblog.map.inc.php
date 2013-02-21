@@ -1,7 +1,9 @@
 <?php
 $xpdo_meta_map['modCronjobLog']= array (
   'package' => 'cronmanager',
+  'version' => NULL,
   'table' => 'cronjobs_log',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'cronjob' => NULL,
