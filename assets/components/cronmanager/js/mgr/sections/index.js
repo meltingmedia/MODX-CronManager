@@ -1,7 +1,4 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'cronmanager-page-home'});
-});
- 
+
 CronManager.page.Home = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -11,7 +8,6 @@ CronManager.page.Home = function(config) {
         }],
 		components: [{
             xtype: 'cronmanager-panel-home'
-            ,renderTo: 'cronmanager-panel-home-div'
         }]
     });
     CronManager.page.Home.superclass.constructor.call(this,config);

@@ -1,7 +1,7 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'cronmanager-page-logs'});
-});
- 
+//Ext.onReady(function() {
+//    MODx.load({ xtype: 'cronmanager-page-logs'});
+//});
+
 CronManager.page.Logs = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -18,7 +18,7 @@ CronManager.page.Logs = function(config) {
         }],
 		components: [{
             xtype: 'cronmanager-panel-logs',
-			renderTo: 'cronmanager-panel-logs-div',
+			//renderTo: 'cronmanager-panel-logs-div',
 			cronid: MODx.request.id
         }]
     });
