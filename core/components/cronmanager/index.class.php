@@ -20,9 +20,9 @@ abstract class CronManagerManagerController extends modExtraManagerController
 
     public function loadBase()
     {
-        $this->addCss($this->cssURL . 'cronmanager.css');
         $this->addJavascript($this->jsURL . 'mgr/cronmanager.js');
         $this->addJavascript($this->jsURL . 'mgr/combos.js');
+        $this->addJavascript($this->jsURL . 'mgr/expander.js');
 
         $this->addHtml('<script type="text/javascript">
         Ext.ns("CronManager");
