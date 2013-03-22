@@ -5,12 +5,12 @@ $action->fromArray(array(
     'id' => 1,
     'namespace' => 'cronmanager',
     'parent' => 0,
-    'controller' => 'controllers/index',
+    'controller' => 'index',
     'haslayout' => true,
     'lang_topics' => 'cronmanager:default',
     'assets' => '',
-),'',true,true);
- 
+), '', true, true);
+
 $menu= $modx->newObject('modMenu');
 $menu->fromArray(array(
     'text' => 'cronmanager',
@@ -23,7 +23,7 @@ $menu->fromArray(array(
 ),'',true,true);
 $menu->addOne($action);
 unset($menus);
- 
+
 return $menu;
 
 ?>

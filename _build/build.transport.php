@@ -68,13 +68,12 @@ $vehicle->resolve('file',array(
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';",
 ));
-$vehicle->resolve('php',array(
-    'source' => $sources['resolvers'] . 'resolve.tablechanges.php',
-));
-
 $modx->log(modX::LOG_LEVEL_INFO,'Adding in PHP resolvers...');
 $vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'resolve.tables.php',
+));
+$vehicle->resolve('php',array(
+    'source' => $sources['resolvers'] . 'cleanup.php',
 ));
 
 $builder->putVehicle($vehicle);
