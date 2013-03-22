@@ -22,6 +22,7 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
      * (defaults to <tt>true</tt>).
      */
     expandOnDblClick : true,
+    expandOnMouseOver : true,
 
     header : '',
     width : 20,
@@ -129,8 +130,10 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         mainBody.on('mouseover', this.onMouseDown, this, {delegate: '.x-grid3-row'});
         mainBody.on('mouseout', this.onMouseDown, this, {delegate: '.x-grid3-row'});
 
-        grid.getView().on('rowremoved', this.onRowRemoved, this);
-        grid.getView().on('rowupdated', this.onRowUpdated, this);
+        if (this.expandOnMouseOver) {
+            grid.getView().on('rowremoved', this.onRowRemoved, this);
+            grid.getView().on('rowupdated', this.onRowUpdated, this);
+        }
 
         if (this.expandOnEnter) {
             this.keyNav = new Ext.KeyNav(this.grid.getGridEl(),

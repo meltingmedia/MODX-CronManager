@@ -33,7 +33,6 @@ CronManager.panel.Home = function(config) {
     CronManager.panel.Home.superclass.constructor.call(this, config);
     this._init();
 };
-
 Ext.extend(CronManager.panel.Home, MODx.Panel, {
     _init: function() {
         // Render help button

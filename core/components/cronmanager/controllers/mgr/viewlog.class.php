@@ -12,11 +12,10 @@ class CronManagerMgrViewLogManagerController extends CronManagerManagerControlle
     {
         $this->addJavascript($this->jsURL . 'mgr/widgets/cronjoblog.grid.js');
         $this->addJavascript($this->jsURL . 'mgr/widgets/logs.panel.js');
-        $this->addJavascript($this->jsURL . 'mgr/sections/viewlog.js');
 
         $this->addHtml('<script type="text/javascript">
             Ext.onReady(function() {
-                MODx.add("cronmanager-page-logs");
+                MODx.add("cronmanager-panel-logs");
             });
         </script>');
     }
