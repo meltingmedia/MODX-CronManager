@@ -6,7 +6,7 @@ set_time_limit(0);
 
 define('PKG_NAME', 'CronManager');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '1.1.2');
+define('PKG_VERSION', '1.1.3');
 define('PKG_RELEASE', 'beta');
 
 /* define build paths */
@@ -100,5 +100,3 @@ $tend= $tend[1] + $tend[0];
 $totalTime= sprintf("%2.4f s",($tend - $tstart));
 $modx->log(modX::LOG_LEVEL_INFO,"\n<br />Package Built.<br />\nExecution time: {$totalTime}\n");
 exit ();
-
-?>
