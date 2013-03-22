@@ -14,11 +14,11 @@ class CronManagerMgrHomeManagerController extends CronManagerManagerController
 
         $this->addJavascript($this->jsURL . 'mgr/widgets/cronjobs.grid.js');
         $this->addJavascript($this->jsURL . 'mgr/widgets/home.panel.js');
-        $this->addJavascript($this->jsURL . 'mgr/sections/index.js');
+        //$this->addJavascript($this->jsURL . 'mgr/sections/index.js');
 
         $this->addHtml('<script type="text/javascript">
             Ext.onReady(function() {
-                MODx.add("cronmanager-page-home");
+                MODx.add("cronmanager-panel-home");
             });
         </script>');
     }

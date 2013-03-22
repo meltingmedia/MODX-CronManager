@@ -13,6 +13,7 @@ $_lang['cronmanager.cronjobs'] = "Cronjobs";
 $_lang['cronmanager.cronjobs_desc'] = "Below you can add, modify or remove cronjob actions. Remember these cronjob actions are only working if the setup of the Cron Manager is followed successfull! See the documentation (or help button) for more details.";
 $_lang['cronmanager.selectasnippet'] = "Please select a snippet";
 $_lang['cronmanager.norecords'] = "There are no cronjob records found";
+$_lang['cronmanager.run_now'] = 'Run now';
 
 $_lang['cronmanager.create'] = "Create new cronjob";
 $_lang['cronmanager.create.error_save'] = "Failed to save the new cronjob. Try it again!";

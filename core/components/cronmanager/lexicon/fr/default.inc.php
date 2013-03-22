@@ -13,6 +13,7 @@ $_lang['cronmanager.cronjobs'] = "Tâches cron";
 $_lang['cronmanager.cronjobs_desc'] = "Ci-dessous, vous pouvez ajouter, modifier ou supprimer des tâches pour cron. Notez que ces tâches ne seront effectives que si vous avez convenablement installé Cron Manager! Consultez la documentation (ou le bouton d'aide) pour plus d'informations.";
 $_lang['cronmanager.selectasnippet'] = "Veuillez choisir un snippet";
 $_lang['cronmanager.norecords'] = "Pas de tâche trouvée";
+$_lang['cronmanager.run_now'] = 'Exécuter maintenant';
 
 $_lang['cronmanager.create'] = "Créer une nouvelle tâche cron";
 $_lang['cronmanager.create.error_save'] = "Erreur lors de l'enregistrement de la tâche. Veuillez ré-essayer!";
