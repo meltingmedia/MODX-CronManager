@@ -12,6 +12,7 @@ class CronManagerMgrHomeManagerController extends CronManagerManagerController
     {
         $this->addJavascript($this->modx->config['manager_url'] . 'assets/modext/util/datetime.js');
 
+        $this->addJavascript($this->jsURL . 'mgr/widgets/cronjoblog.grid.js');
         $this->addJavascript($this->jsURL . 'mgr/widgets/cronjobs.grid.js');
         $this->addJavascript($this->jsURL . 'mgr/widgets/home.panel.js');
 

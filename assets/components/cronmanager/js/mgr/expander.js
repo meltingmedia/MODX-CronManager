@@ -127,13 +127,13 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         mainBody.on('mousedown', this.onMouseDown, this, {
             delegate : '.x-grid3-row-expander'
         });
-        mainBody.on('mouseover', this.onMouseDown, this, {delegate: '.x-grid3-row'});
-        mainBody.on('mouseout', this.onMouseDown, this, {delegate: '.x-grid3-row'});
-
         if (this.expandOnMouseOver) {
-            grid.getView().on('rowremoved', this.onRowRemoved, this);
-            grid.getView().on('rowupdated', this.onRowUpdated, this);
+            mainBody.on('mouseover', this.onMouseDown, this, {delegate: '.x-grid3-row'});
+            mainBody.on('mouseout', this.onMouseDown, this, {delegate: '.x-grid3-row'});
         }
+
+        grid.getView().on('rowremoved', this.onRowRemoved, this);
+        grid.getView().on('rowupdated', this.onRowUpdated, this);
 
         if (this.expandOnEnter) {
             this.keyNav = new Ext.KeyNav(this.grid.getGridEl(),
@@ -321,8 +321,9 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         this.expandingRowPanel[panelItemIndex] = new Ext.Panel({
             border : false,
             bodyBorder : false,
-            layout : 'form',
+            layout : 'anchor',
             renderTo : rowBody,
+            autoHeight: true,
             items : this.createExpandingRowPanelItems(record, rowIndex)
         });
 

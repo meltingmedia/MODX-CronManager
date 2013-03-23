@@ -1,0 +1,57 @@
+#test-panel ul.x-tab-strip-top {
+    background-color: transparent;
+    background-image: none;
+    border: 0 none;
+    border-bottom: 0 none;
+}
+
+#test-panel ul.x-tab-strip-top li {
+    -moz-border-radius:4px 4px 0 0;
+    -webkit-border-radius:4px 4px 0 0;
+    -khtml-border-radius:4px 4px 0 0;
+    border: 0 none;
+    margin:1px 0 1px 2px;
+    padding:2px 0;
+    background: transparent;
+/*    background: url(../images/modx-theme/tabs/tab-bg.svg) #658F1A;
+    background:-moz-linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%) repeat scroll 0 0 transparent;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#8BAF4C),color-stop(100%,#658F1A));
+    background:-webkit-linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);
+    background:-o-linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);
+    background:-ms-linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#8BAF4C,endColorstr=#658F1A,GradientType=0);
+    background:linear-gradient(center bottom,#658F1A 0%,#8BAF4C 100%);*/
+}
+
+#test-panel .x-tab-panel-footer-plain .x-tab-strip-spacer {
+    background-color: transparent;
+    border: 0 none;
+    height: 3px;
+    margin-top: -3px;
+}
+
+#test-panel ul.x-tab-strip-top li.x-tab-strip-active span.x-tab-strip-text, ul.x-tab-strip-top li.x-tab-strip-active .x-tab-right span.x-tab-strip-text {
+    color: #999;
+    margin-top: 0;
+}
+
+#test-panel ul.x-tab-strip-top span.x-tab-strip-text {
+    color: #666;
+    text-shadow: none;
+}
+
+#test-panel ul.x-tab-strip-top li.x-tab-strip-active {
+    background: transparent !important;
+}
+
+#test-panel .x-tab-panel-body {
+    border: 0 none;
+    background: transparent;
+}
+
+#test-panel .x-tab-panel-header-plain .x-tab-strip-spacer, .x-tab-panel-footer-plain .x-tab-strip-spacer {
+    background: transparent;
+    border: 0 none;
+    border-color: transparent;
+    border-top: 0 none !important;
+}
