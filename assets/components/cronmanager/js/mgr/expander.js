@@ -15,26 +15,28 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
      * <tt>true</tt> to toggle selected row(s) between expanded/collapsed when the enter
      * key is pressed (defaults to <tt>true</tt>).
      */
-    expandOnEnter : true,
+    expandOnEnter : true
     /**
      * @cfg {Boolean} expandOnDblClick
      * <tt>true</tt> to toggle a row between expanded/collapsed when double clicked
      * (defaults to <tt>true</tt>).
      */
-    expandOnDblClick : true,
-    expandOnMouseOver : true,
+    ,expandOnDblClick : true
 
-    header : '',
-    width : 20,
-    sortable : false,
-    fixed : true,
-    menuDisabled : true,
-    dataIndex : '',
-    id : 'expander',
-    lazyRender : true,
-    enableCaching : true,
+    ,expandOnRowMouseOver : false
+    ,expandOnRowClick : false
 
-    constructor : function(config) {
+    ,header : ''
+    ,width : 20
+    ,sortable : false
+    ,fixed : true
+    ,menuDisabled : true
+    ,dataIndex : ''
+    ,id : 'expander'
+    ,lazyRender : true
+    ,enableCaching : true
+
+    ,constructor : function(config) {
         Ext.apply(this, config);
 
         this.addEvents( {
@@ -46,7 +48,7 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
              * @param {Object} body body element for the secondary row.
              * @param {Number} rowIndex The current row index.
              */
-            beforeexpand : true,
+            beforeexpand : true
             /**
              * @event expand
              * Fires after the row expands.
@@ -55,7 +57,7 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
              * @param {Object} body body element for the secondary row.
              * @param {Number} rowIndex The current row index.
              */
-            expand : true,
+            ,expand : true
             /**
              * @event beforecollapse
              * Fires before the row collapses. Have the listener return false to prevent the row from collapsing.
@@ -64,7 +66,7 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
              * @param {Object} body body element for the secondary row.
              * @param {Number} rowIndex The current row index.
              */
-            beforecollapse : true,
+            ,beforecollapse : true
             /**
              * @event collapse
              * Fires after the row collapses.
@@ -73,7 +75,7 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
              * @param {Object} body body element for the secondary row.
              * @param {Number} rowIndex The current row index.
              */
-            collapse : true
+            ,collapse : true
         });
 
         Ext.ux.grid.RowPanelExpander.superclass.constructor.call(this);
@@ -87,9 +89,9 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
 
         this.state = {};
         this.bodyContent = {};
-    },
+    }
 
-    getRowClass : function(record, rowIndex, p, ds) {
+    ,getRowClass : function(record, rowIndex, p, ds) {
         p.cols = p.cols - 1;
         var content = this.bodyContent[record.id];
         if (!content && !this.lazyRender) {
@@ -98,11 +100,11 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         if (content) {
             p.body = content;
         }
-        return this.state[record.id] ? 'x-grid3-row-expanded'
-            : 'x-grid3-row-collapsed';
-    },
 
-    init : function(grid) {
+        return this.state[record.id] ? 'x-grid3-row-expanded' : 'x-grid3-row-collapsed';
+    }
+
+    ,init : function(grid) {
         this.grid = grid;
 
         var view = grid.getView();
@@ -114,20 +116,20 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         grid.on('render', this.onRender, this);
         grid.store.on('load', this.onStoreLoaded, this);
         grid.on('destroy', this.onDestroy, this);
-        grid.on("beforestaterestore", this.applyState, this);
-        grid.on("beforestatesave", this.saveState, this);
-    },
+        grid.on('beforestaterestore', this.applyState, this);
+        grid.on('beforestatesave', this.saveState, this);
+    }
 
     // @private
-    onRender : function() {
+    ,onRender : function() {
         var grid = this.grid;
-
-
         var mainBody = grid.getView().mainBody;
         mainBody.on('mousedown', this.onMouseDown, this, {
-            delegate : '.x-grid3-row-expander'
+            // if expandOnRowClick target the whole grid row, else target only the expander column
+            delegate : this.expandOnRowClick ? '.x-grid3-row' : '.x-grid3-row-expander'
         });
-        if (this.expandOnMouseOver) {
+        if (this.expandOnRowMouseOver) {
+            // @todo refactor since mouse over the row panel content triggers mouseout
             mainBody.on('mouseover', this.onMouseDown, this, {delegate: '.x-grid3-row'});
             mainBody.on('mouseout', this.onMouseDown, this, {delegate: '.x-grid3-row'});
         }
@@ -145,9 +147,9 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         if (this.expandOnDblClick) {
             grid.on('rowdblclick', this.onRowDblClick, this);
         }
-    },
+    }
 
-    onStoreLoaded: function(store, records,options) {
+    ,onStoreLoaded: function(store, records,options) {
         var index = -1;
         for(var key in this.state){
             if (this.state[key] === true) {
@@ -157,24 +159,24 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
                 }
             }
         }
-    },
+    }
 
     /** @private */
-    applyState: function(grid, state){
+    ,applyState: function(grid, state){
         this.suspendStateStore = true;
-        if(state.expander) {
+        if (state.expander) {
             this.state = state.expander;
         }
         this.suspendStateStore = false;
-    },
+    }
 
     /** @private */
-    saveState: function(grid, state){
+    ,saveState: function(grid, state){
         return state.expander = this.state;
-    },
+    }
 
     /** @private */
-    onDestroy : function() {
+    ,onDestroy : function() {
         if (this.keyNav) {
             this.keyNav.disable();
             delete this.keyNav;
@@ -188,33 +190,32 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         if (mainBody) {
             mainBody.un('mousedown', this.onMouseDown, this);
         }
-    },
+    }
 
     /** @private */
-    onRowDblClick : function(grid, rowIdx, e) {
+    ,onRowDblClick : function(grid, rowIdx, e) {
         this.toggleRow(rowIdx);
-    },
-
+    }
 
     // This will not get fired for an update
-    onRowRemoved: function(view, row, rec) {
+    ,onRowRemoved: function(view, row, rec) {
         var panelItemIndex = rec.id;
 
         if (this.expandingRowPanel && this.expandingRowPanel[panelItemIndex]) {
             this.expandingRowPanel[panelItemIndex].destroy();
             this.expandingRowPanel[panelItemIndex] = null;
         }
-    },
+    }
 
-    onRowUpdated: function(view, row, rec) {
+    ,onRowUpdated: function(view, row, rec) {
         if (typeof row == 'number') {
             row = this.grid.view.getRow(row);
         }
 
         this[Ext.fly(row).hasClass('x-grid3-row-collapsed') ? 'collapseRow' : 'expandRow'](row);
-    },
+    }
 
-    getBodyContent : function(record, index) {
+    ,getBodyContent : function(record, index) {
         // extend here
         if (!this.enableCaching) {
             return this.tpl.apply(record.data);
@@ -224,21 +225,22 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
             content = this.tpl.apply(record.data);
             this.bodyContent[record.id] = content;
         }
-        return content;
-    },
 
-    onMouseDown : function(e, t) {
+        return content;
+    }
+
+    ,onMouseDown : function(e, t) {
         e.stopEvent();
         var row = e.getTarget('.x-grid3-row');
         this.toggleRow(row);
-    },
+    }
 
-    renderer : function(v, p, record) {
+    ,renderer : function(v, p, record) {
         p.cellAttr = 'rowspan="2"';
         return '<div class="x-grid3-row-expander">&#160;</div>';
-    },
+    }
 
-    beforeExpand : function(record, body, rowIndex) {
+    ,beforeExpand : function(record, body, rowIndex) {
         if (this.fireEvent('beforeexpand', this, record, body, rowIndex) !== false) {
             if (this.tpl && this.lazyRender) {
                 body.innerHTML = this.getBodyContent(record, rowIndex);
@@ -246,20 +248,21 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
             if (body.innerHTML == '' || !this.enableCaching) {
                 this.createExpandingRowPanel(record, body, rowIndex);
             }
-            return true;
-        } else {
-            return false;
-        }
-    },
 
-    toggleRow : function(row) {
+            return true;
+        }
+
+        return false;
+    }
+
+    ,toggleRow : function(row) {
         if (typeof row == 'number') {
             row = this.grid.view.getRow(row);
         }
         this[Ext.fly(row).hasClass('x-grid3-row-collapsed') ? 'expandRow' : 'collapseRow'](row);
-    },
+    }
 
-    expandRow : function(row) {
+    ,expandRow : function(row) {
         if (typeof row == 'number') {
             row = this.grid.view.getRow(row);
         }
@@ -271,40 +274,44 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
             this.grid.saveState();
             this.fireEvent('expand', this, record, body, row.rowIndex);
         }
-    },
+    }
 
-    collapseRow : function(row) {
+    ,collapseRow : function(row) {
         if (typeof row == 'number') {
             row = this.grid.view.getRow(row);
         }
         var record = this.grid.store.getAt(row.rowIndex);
-        var body = Ext.fly(row).child(
-            'tr:nth(1) div.x-grid3-row-body', true);
-        if (this.fireEvent('beforecollapse', this, record, 	body, row.rowIndex) !== false) {
+        var body = Ext.fly(row).child('tr:nth(1) div.x-grid3-row-body', true);
+        if (this.fireEvent('beforecollapse', this, record, body, row.rowIndex) !== false) {
             this.state[record.id] = false;
             Ext.fly(row).replaceClass('x-grid3-row-expanded', 'x-grid3-row-collapsed');
             this.grid.saveState();
             this.fireEvent('collapse', this, record, body, row.rowIndex);
+            // Destroy the panel for a better memory management
+            if (this.expandingRowPanel[record.id]) {
+                this.expandingRowPanel[record.id].destroy();
+                this.expandingRowPanel[record.id] = null;
+            }
         }
-    },
+    }
 
     // Expand all rows
-    expandAll : function() {
+    ,expandAll : function() {
         var aRows = this.grid.getView().getRows();
         for (var i = 0; i < aRows.length; i++) {
             this.expandRow(aRows[i]);
         }
-    },
+    }
 
     // Collapse all rows
-    collapseAll : function() {
+    ,collapseAll : function() {
         var aRows = this.grid.getView().getRows();
         for (var i = 0; i < aRows.length; i++) {
             this.collapseRow(aRows[i]);
         }
-    },
+    }
 
-    createExpandingRowPanel : function(record, rowBody, rowIndex) {
+    ,createExpandingRowPanel : function(record, rowBody, rowIndex) {
         // record.id is more stable than rowIndex for panel item's key; rows can be deleted.
         var panelItemIndex = record.id;
         // var panelItemIndex = rowIndex;
@@ -319,24 +326,23 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
             this.expandingRowPanel[panelItemIndex].destroy();
         }
         this.expandingRowPanel[panelItemIndex] = new Ext.Panel({
-            border : false,
-            bodyBorder : false,
-            layout : 'anchor',
-            renderTo : rowBody,
-            autoHeight: true,
-            items : this.createExpandingRowPanelItems(record, rowIndex)
+            border : false
+            ,cls: 'expander_editor'
+            ,bodyBorder : false
+            ,layout : 'anchor'
+            ,renderTo : rowBody
+            ,autoHeight: true
+            ,items : this.createExpandingRowPanelItems(record, rowIndex)
         });
 
-    },
+    }
 
     /**
      * Override this method to put Ext form items into the expanding row panel.
      * @return Array of panel items.
      */
-    createExpandingRowPanelItems : function(record, rowIndex) {
-        var panelItems = [];
-
-        return panelItems;
+    ,createExpandingRowPanelItems : function(record, rowIndex) {
+        return [];
     }
 });
 
