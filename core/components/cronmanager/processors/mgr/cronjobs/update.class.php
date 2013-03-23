@@ -10,6 +10,10 @@ class modCronjobUpdateProcessor extends modObjectUpdateProcessor {
 
         return parent::beforeSet();
     }
+
+    public function cleanup() {
+        return $this->success('', $this->object->toArray());
+    }
 }
 
 return 'modCronjobUpdateProcessor';

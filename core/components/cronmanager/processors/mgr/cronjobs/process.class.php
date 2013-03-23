@@ -23,7 +23,7 @@ class RunNow extends modProcessor
         $this->executeJob();
         $this->modx->log(modX::LOG_LEVEL_ERROR, 'after exec');
 
-        return $this->success();
+        return $this->success('', $this->job->display());
     }
 
     public function executeJob()

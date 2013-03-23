@@ -34,4 +34,23 @@ class modCronjob extends xPDOSimpleObject {
         if ($returnCount) return $total;
         return ($total > 0);
     }
+
+    public function display() {
+        $data = $this->toArray();
+        $data['logs'] = $this->countLogs();
+
+        /** @var $snippet modSnippet */
+        $snippet = $this->getOne('Snippet');
+        if ($snippet) $data['snippet_name'] = $snippet->get('name');
+
+        if (empty($data['nextrun'])) {
+            $data['nextrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
+        }
+
+        if (empty($data['lastrun'])) {
+            $data['lastrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
+        }
+
+        return $data;
+    }
 }
