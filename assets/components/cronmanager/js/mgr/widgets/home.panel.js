@@ -39,8 +39,8 @@ CronManager.panel.Home = function(config) {
                 autoHeight: true
                 ,anchor: '100%'
             }
-//            ,layout: 'anchor'
-//            ,anchor: '100%'
+            ,layout: 'anchor'
+            ,anchor: '100%'
             ,items: [{
                 html: _('cronmanager.cronjobs_desc')
                 ,bodyCssClass: 'panel-desc'

@@ -57,6 +57,8 @@ class modCronjob extends xPDOSimpleObject {
             $data['nextrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
         }
 
+        $data['nextrun_seconds'] = (strtotime($data['nextrun']) - time());
+
         if (empty($data['lastrun'])) {
             $data['lastrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
         }
