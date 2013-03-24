@@ -15,26 +15,26 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
      * <tt>true</tt> to toggle selected row(s) between expanded/collapsed when the enter
      * key is pressed (defaults to <tt>true</tt>).
      */
-    expandOnEnter : true
+    expandOnEnter: true
     /**
      * @cfg {Boolean} expandOnDblClick
      * <tt>true</tt> to toggle a row between expanded/collapsed when double clicked
      * (defaults to <tt>true</tt>).
      */
-    ,expandOnDblClick : true
+    ,expandOnDblClick: true
 
-    ,expandOnRowMouseOver : false
-    ,expandOnRowClick : false
+    ,expandOnRowMouseOver: false
+    ,expandOnRowClick: false
 
-    ,header : ''
-    ,width : 20
-    ,sortable : false
-    ,fixed : true
-    ,menuDisabled : true
-    ,dataIndex : ''
-    ,id : 'expander'
-    ,lazyRender : true
-    ,enableCaching : true
+    ,header: ''
+    ,width: 20
+    ,sortable: false
+    ,fixed: true
+    ,menuDisabled: true
+    ,dataIndex: ''
+    ,id: 'expander'
+    ,lazyRender: true
+    ,enableCaching: true
 
     ,constructor : function(config) {
         Ext.apply(this, config);
@@ -149,9 +149,9 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         }
     }
 
-    ,onStoreLoaded: function(store, records,options) {
+    ,onStoreLoaded: function(store, records, options) {
         var index = -1;
-        for(var key in this.state){
+        for (var key in this.state) {
             if (this.state[key] === true) {
                 index = store.indexOfId(key);
                 if (index > -1) {
@@ -288,10 +288,10 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
             this.grid.saveState();
             this.fireEvent('collapse', this, record, body, row.rowIndex);
             // Destroy the panel for a better memory management
-            if (this.expandingRowPanel[record.id]) {
-                this.expandingRowPanel[record.id].destroy();
-                this.expandingRowPanel[record.id] = null;
-            }
+//            if (this.expandingRowPanel[record.id] && this.enableCaching === false) {
+//                this.expandingRowPanel[record.id].destroy();
+//                this.expandingRowPanel[record.id] = null;
+//            }
         }
     }
 

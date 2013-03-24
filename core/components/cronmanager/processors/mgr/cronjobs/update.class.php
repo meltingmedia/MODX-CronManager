@@ -3,6 +3,8 @@ class modCronjobUpdateProcessor extends modObjectUpdateProcessor {
     public $classKey = 'modCronjob';
     public $languageTopics = array('cronmanager:default');
     public $objectType = 'cronmanager.modcronjob';
+    /** @var modCronJob */
+    public $object;
 
     public function beforeSet() {
         $minutes = $this->getProperty('minutes');
@@ -12,7 +14,7 @@ class modCronjobUpdateProcessor extends modObjectUpdateProcessor {
     }
 
     public function cleanup() {
-        return $this->success('', $this->object->toArray());
+        return $this->success('', $this->object->display());
     }
 }
 

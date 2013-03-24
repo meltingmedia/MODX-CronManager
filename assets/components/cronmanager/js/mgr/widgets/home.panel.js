@@ -9,22 +9,43 @@
 CronManager.panel.Home = function(config) {
     config = config || {};
 
+//    var bar = new Ext.ProgressBar({
+//        width: 300
+//    });
+//    bar.wait({
+//        interval: 200
+//        ,duration: 5000
+//        ,increment: (5000 / 200)
+//        ,animate: true
+//        ,fn: function() {
+//            //console.log(this);
+//            this.updateProgress(1, '', true);
+//            console.log('done');
+//        }
+//    });
+
     Ext.apply(config, {
         border: false
         ,unstyled: true
         ,cls: 'container'
+        ,layout: 'anchor'
+        ,anchor: '100%'
         ,items: [{
             html: '<h2>' + _('cronmanager') + '</h2>'
             ,border: false
             ,cls: 'modx-page-header'
         },{
-            defaults: { autoHeight: true }
-            ,layout: 'anchor'
+            defaults: {
+                autoHeight: true
+                ,anchor: '100%'
+            }
+//            ,layout: 'anchor'
+//            ,anchor: '100%'
             ,items: [{
                 html: _('cronmanager.cronjobs_desc')
                 ,bodyCssClass: 'panel-desc'
                 ,border: false
-            },{
+            }, /*bar,*/ {
                 xtype: 'cronmanager-grid-cronjobs'
                 ,cls: 'main-wrapper'
             }]

@@ -21,17 +21,7 @@ class modCronjobGetListProcessor extends modObjectGetListProcessor {
 
     public function prepareRow(xPDOObject $object) {
         /** @var modCronJob $object */
-        $objectArray = $object->toArray('', false, true);
-
-        if (empty($objectArray['nextrun'])) {
-            $objectArray['nextrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
-        }
-
-        if (empty($objectArray['lastrun'])) {
-            $objectArray['lastrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
-        }
-
-        return $objectArray;
+        return $object->display();
     }
 }
 

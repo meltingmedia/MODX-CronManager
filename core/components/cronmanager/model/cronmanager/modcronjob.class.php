@@ -6,11 +6,16 @@ class modCronjob extends xPDOSimpleObject {
      *
      * @return int
      */
-    public function countLogs() {
+    public function countLogs($errors = false) {
         $c = $this->xpdo->newQuery('modCronjobLog');
         $c->where(array(
             'cronjob' => $this->get('id'),
         ));
+        if ($errors) {
+            $c->where(array(
+                'error' => true,
+            ));
+        }
 
         return $this->xpdo->getCount('modCronjobLog', $c);
     }
@@ -38,10 +43,15 @@ class modCronjob extends xPDOSimpleObject {
     public function display() {
         $data = $this->toArray();
         $data['logs'] = $this->countLogs();
+        $data['logs_error'] = $this->countLogs(true);
 
+        $data['snippet_description'] = '';
         /** @var $snippet modSnippet */
-        $snippet = $this->getOne('Snippet');
-        if ($snippet) $data['snippet_name'] = $snippet->get('name');
+        $snippet = $this->Snippet;
+        if ($snippet) {
+            $data['snippet_name'] = $snippet->get('name');
+            $data['snippet_description'] = $snippet->get('description');
+        }
 
         if (empty($data['nextrun'])) {
             $data['nextrun'] = '<i>'. $this->modx->lexicon('cronmanager.runempty') .'</i>';
