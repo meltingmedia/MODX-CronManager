@@ -64,6 +64,11 @@
         color: #888;
     }
 
+.expander_editor .panel-bottom-toolbar {
+    background: transparent;
+    border: 0 none transparent;
+    margin-top: 40px;
+}
 
 
 
@@ -153,3 +158,19 @@
     .expander_editor .x-toolbar-left {
         width: 0;
     }
+
+.glyph_edit {
+    background-image: url("../img/glyphicons_150_edit.png");
+}
+.glyph_actions {
+    background-image: url("../img/glyphicons_222_share.png");
+}
+.glyph_remove {
+    background-image: url("../img/glyphicons_197_remove.png");
+}
+.glyph_logs {
+    background-image: url("../img/glyphicons_130_inbox.png");
+}
+.glyph_run {
+    background-image: url("../img/glyphicons_365_restart.png");
+}

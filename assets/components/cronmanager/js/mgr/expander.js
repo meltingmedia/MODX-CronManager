@@ -108,8 +108,7 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         this.grid = grid;
 
         var view = grid.getView();
-        view.getRowClass = this.getRowClass
-            .createDelegate(this);
+        view.getRowClass = this.getRowClass.createDelegate(this);
 
         view.enableRowBody = true;
 
@@ -140,8 +139,8 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         if (this.expandOnEnter) {
             this.keyNav = new Ext.KeyNav(this.grid.getGridEl(),
                 {
-                    'enter' : this.onEnter,
-                    scope : this
+                    enter : this.onEnter
+                    ,scope : this
                 });
         }
         if (this.expandOnDblClick) {
@@ -345,5 +344,4 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         return [];
     }
 });
-
 Ext.preg('rowexpander', Ext.ux.grid.RowPanelExpander);
