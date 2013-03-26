@@ -7,8 +7,6 @@ class RunNow extends modProcessor
 
     public function process()
     {
-        $this->modx->log(modX::LOG_LEVEL_ERROR, print_r($this->getProperties(), true));
-
         $id = $this->getProperty('id');
         if (!$id) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, 'id');
@@ -19,9 +17,7 @@ class RunNow extends modProcessor
             $this->modx->log(modX::LOG_LEVEL_ERROR, 'Job not found, sorry');
             return $this->failure('Job not found, sorry');
         }
-        $this->modx->log(modX::LOG_LEVEL_ERROR, 'before job');
         $this->executeJob();
-        $this->modx->log(modX::LOG_LEVEL_ERROR, 'after exec');
 
         return $this->success('', $this->job->display());
     }
@@ -55,7 +51,6 @@ class RunNow extends modProcessor
         }
         /** @var modSnippet $snippet */
         $snippet = $this->job->getOne('Snippet');
-        $this->modx->log(modX::LOG_LEVEL_ERROR, $snippet->get('name'));
         /**
          * The snippet should return a json array :
          * array('error' => boolean, 'message' => string)
@@ -64,7 +59,6 @@ class RunNow extends modProcessor
          * This will allow to define if an error occurred and ease the process of filtering logs
          */
         $response = $snippet->process($properties);
-        $this->modx->log(modX::LOG_LEVEL_ERROR, print_r($response, true));
         if (substr($response, 0, 1) == '{' && substr($response, (strlen($response)-1), 1) == '}') {
             $response = json_decode($response, true);
         } else {
@@ -72,7 +66,6 @@ class RunNow extends modProcessor
             $response = array();
             $response['message'] = $msg;
         }
-        $this->modx->log(modX::LOG_LEVEL_ERROR, print_r($response, true));
 
         // add log run
         $logs = array();

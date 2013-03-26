@@ -21,6 +21,7 @@ $_lang['cronmanager.create'] = 'Créer une nouvelle tâche cron';
 $_lang['cronmanager.create_desc'] = 'Configurez les options de la tâche';
 $_lang['cronmanager.create_title'] = 'Créer une nouvelle tâche';
 $_lang['cronmanager.create.error_save'] = 'Erreur lors de l\'enregistrement de la tâche. Veuillez ré-essayer!';
+$_lang['cronmanager.execute'] = 'Exécuter';
 $_lang['cronmanager.id'] = 'ID Cron';
 $_lang['cronmanager.inactive'] = 'Inactif';
 $_lang['cronmanager.lastrun'] = 'Dernière exécution';

@@ -21,6 +21,7 @@ $_lang['cronmanager.create'] = 'Create new cronjob';
 $_lang['cronmanager.create_desc'] = 'Define job options.';
 $_lang['cronmanager.create_title'] = 'Create a new cronjob';
 $_lang['cronmanager.create.error_save'] = 'Failed to save the new cronjob. Try it again!';
+$_lang['cronmanager.execute'] = 'Execute';
 $_lang['cronmanager.id'] = 'Cron ID';
 $_lang['cronmanager.inactive'] = 'Inactive';
 $_lang['cronmanager.lastrun'] = 'Last run';
