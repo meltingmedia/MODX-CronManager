@@ -6,47 +6,60 @@
  * @subpackage lexicon
  */
 
-$_lang['cronmanager'] = "Cron Manager";
-$_lang['cronmanager.desc'] = "Gérez vos tâches cron depuis le manager.";
-$_lang['cronmanager.search...'] = "Rechercher…";
-$_lang['cronmanager.cronjobs'] = "Tâches cron";
-$_lang['cronmanager.cronjobs_desc'] = "Ci-dessous, vous pouvez ajouter, modifier ou supprimer des tâches pour cron. Notez que ces tâches ne seront effectives que si vous avez convenablement installé Cron Manager! Consultez la documentation (ou le bouton d'aide) pour plus d'informations.";
-$_lang['cronmanager.selectasnippet'] = "Veuillez choisir un snippet";
-$_lang['cronmanager.norecords'] = "Pas de tâche trouvée";
+$_lang['cronmanager'] = 'Cron Manager';
+$_lang['cronmanager.cancel'] = 'Annuler';
+$_lang['cronmanager.desc'] = 'Gérez vos tâches cron depuis le manager.';
+$_lang['cronmanager.search...'] = 'Rechercher…';
+$_lang['cronmanager.wait'] = 'Veuillez patienter…';
+
+$_lang['cronmanager.cronjobs'] = 'Tâches cron';
+$_lang['cronmanager.cronjobs_desc'] = 'Ci-dessous, vous pouvez ajouter, modifier ou supprimer des tâches pour cron. Notez que ces tâches ne seront effectives que si vous avez convenablement installé Cron Manager! Consultez la documentation (ou le bouton d\'aide) pour plus d\'informations.';
+$_lang['cronmanager.norecords'] = 'Pas de tâche trouvée';
+
+$_lang['cronmanager.active'] = 'Active';
+$_lang['cronmanager.create'] = 'Créer une nouvelle tâche cron';
+$_lang['cronmanager.create_desc'] = 'Configurez les options de la tâche';
+$_lang['cronmanager.create_title'] = 'Créer une nouvelle tâche';
+$_lang['cronmanager.create.error_save'] = 'Erreur lors de l\'enregistrement de la tâche. Veuillez ré-essayer!';
+$_lang['cronmanager.id'] = 'ID Cron';
+$_lang['cronmanager.inactive'] = 'Inactif';
+$_lang['cronmanager.lastrun'] = 'Dernière exécution';
+$_lang['cronmanager.minutes'] = 'Minute(s)';
+$_lang['cronmanager.minutes_desc'] = 'Interval, en minutes, durant lequel ce snippet doit être éxecuté. La valeur minimale est 1 minute.';
+$_lang['cronmanager.nextrun'] = 'Prochaine exécution';
+$_lang['cronmanager.properties'] = 'Propriétés du snippet';
+$_lang['cronmanager.properties_desc'] = 'Vous pouvez entrer le nom d\'un set de propriétés, un jeu de clé-valeur;<br /><ul><li>clé: valeur</li><li>clé2: valeur2</li></ul>ou un objet JSON.';
 $_lang['cronmanager.run_now'] = 'Exécuter maintenant';
+$_lang['cronmanager.run_now_desc'] = 'La tâche sera exécutée, qu\'elle soit désactivée ou déjà en cours.';
+$_lang['cronmanager.run_now_title'] = 'Exécuter [[+job]] maintenant ?';
+$_lang['cronmanager.runempty'] = 'Tâche pas encore démarrée';
+$_lang['cronmanager.running'] = 'En cours…';
+$_lang['cronmanager.snippet'] = 'Snippet';
+$_lang['cronmanager.selectasnippet'] = 'Veuillez choisir un snippet';
 
-$_lang['cronmanager.create'] = "Créer une nouvelle tâche cron";
-$_lang['cronmanager.create.error_save'] = "Erreur lors de l'enregistrement de la tâche. Veuillez ré-essayer!";
-$_lang['cronmanager.search...'] = "Rechercher…";
-$_lang['cronmanager.id'] = "ID Cron";
-$_lang['cronmanager.snippet'] = "Snippet";
-$_lang['cronmanager.minutes'] = "Minute(s)";
-$_lang['cronmanager.minutes_desc'] = "Interval, en minutes, durant lequel ce snippet doit être éxecuté. La valeur minimale est 1 minute.";
-$_lang['cronmanager.properties'] = "Propriétés du snippet";
-$_lang['cronmanager.properties_desc'] = "Vous pouvez entrer le nom d'un set de propriétés, un jeu de clé-valeur;<br /><ul><li>clé: valeur</li><li>clé2: valeur2</li></ul>ou un objet JSON.";
-$_lang['cronmanager.lastrun'] = "Dernière exécution";
-$_lang['cronmanager.nextrun'] = "Prochaine exécution";
-$_lang['cronmanager.runempty'] = "Tâche pas encore démarrée";
-$_lang['cronmanager.active'] = "Active";
-
-$_lang['cronmanager.update'] = "Mettre à jour la tâche cron";
-$_lang['cronmanager.error_update'] = "Erreur lors de la mise à jour de la tâche. Veuillez ré-essayer!";
-$_lang['cronmanager.viewlog'] = "Consulter le log de cron";
-$_lang['cronmanager.logview'] = "Consulter le log de cron pour [[+snippet]]…";
-$_lang['cronmanager.remove'] = "Supprimer la tâche cron";
-$_lang['cronmanager.remove_confirm'] = "Êtes-vous sûr de vouloir supprimer [[+snippet]] de la liste de tâches cron ?";
-$_lang['cronmanager.error_remove'] = "Une erreur est survenue lors de la suppression de la tâche. Veuillez ré-essayer!";
+$_lang['cronmanager.error_remove'] = 'Une erreur est survenue lors de la suppression de la tâche. Veuillez ré-essayer!';
+$_lang['cronmanager.error_update'] = 'Erreur lors de la mise à jour de la tâche. Veuillez ré-essayer!';
+$_lang['cronmanager.logview'] = 'Consulter le log de cron pour [[+snippet]]…';
+$_lang['cronmanager.remove'] = 'Supprimer la tâche cron';
+$_lang['cronmanager.remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer [[+snippet]] de la liste de tâches cron ?';
+$_lang['cronmanager.remove_desc'] = 'Seule la tâche sera supprimée, le snippet sera conservé.';
+$_lang['cronmanager.remove_title'] = 'Supprimer la tâche [[+job]] ?';
+$_lang['cronmanager.update'] = 'Mettre à jour la tâche cron';
+$_lang['cronmanager.update_desc'] = 'Mettez à jour les options.';
+$_lang['cronmanager.update_title'] = 'Mettre à jour [[+job]]';
+$_lang['cronmanager.viewlog'] = 'Consulter le log de cron';
 
 // log part
-$_lang['cronmanager.log'] = "Logs des tâches cron";
-$_lang['cronmanager.log.btnback'] = "Retour aux tâches";
-$_lang['cronmanager.logs'] = "Logs de la tâche";
-$_lang['cronmanager.logs_desc'] = "Consultez les logs de la tâche sélectionnée.";
+$_lang['cronmanager.log'] = 'Logs des tâches cron';
+$_lang['cronmanager.log.btnback'] = 'Retour aux tâches';
+$_lang['cronmanager.log.norecords'] = 'Aucune entrée de log pour cette tâche';
+$_lang['cronmanager.log.date'] = 'Date du log';
+$_lang['cronmanager.log.errorload'] = 'Impossible d\'exécuter la tâche pour ce log.';
+$_lang['cronmanager.log.message'] = 'Message de log';
+$_lang['cronmanager.logs'] = 'Logs de la tâche';
+$_lang['cronmanager.logs_desc'] = 'Consultez les logs de la tâche sélectionnée.';
 $_lang['cronmanager.logs_entries'] = 'Logs';
-$_lang['cronmanager.log.norecords'] = "Aucune entrée de log pour cette tâche";
-$_lang['cronmanager.log.date'] = "Date du log";
-$_lang['cronmanager.log.message'] = "Message de log";
-$_lang['cronmanager.log.errorload'] = "Impossible d'exécuter la tâche pour ce log.";
+$_lang['cronmanager.logs_title'] = 'Consulter les messages de logs de [[+job]]';
 
 $_lang['cronmanager.cronjob_err_ns'] = 'Aucun ID de cronjob de défini.';
 $_lang['cronmanager.log_day'] = 'Jour';
@@ -66,5 +79,3 @@ $_lang['cronmanager.logs_purge_no_err'] = 'Purger les logs sans erreur';
 $_lang['cronmanager.logs_purge_nothing'] = 'Aucun log à purger';
 $_lang['cronmanager.logs_purge_success'] = '[[+total]] log(s) purgé(s) avec succès.';
 $_lang['cronmanager.logs_purge_title'] = 'Purger les logs';
-
-?>

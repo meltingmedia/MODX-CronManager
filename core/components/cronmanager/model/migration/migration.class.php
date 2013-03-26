@@ -84,7 +84,7 @@ class Migration
      *
      * @param string $version
      */
-    public function setCurrentVersion($version)
+    public function setVersion($version)
     {
         $key = $this->config['package_name'] . '.current_version';
         /** @var $setting modSystemSetting */

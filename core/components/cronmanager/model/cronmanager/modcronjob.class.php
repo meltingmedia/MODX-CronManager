@@ -1,12 +1,15 @@
 <?php
-class modCronjob extends xPDOSimpleObject {
+
+class modCronjob extends xPDOSimpleObject
+{
 
     /**
      * Counts the number of logs for this job
      *
      * @return int
      */
-    public function countLogs($errors = false) {
+    public function countLogs($errors = false)
+    {
         $c = $this->xpdo->newQuery('modCronjobLog');
         $c->where(array(
             'cronjob' => $this->get('id'),
@@ -20,27 +23,8 @@ class modCronjob extends xPDOSimpleObject {
         return $this->xpdo->getCount('modCronjobLog', $c);
     }
 
-    /**
-     * Checks if this job has some error
-     *
-     * @param bool $returnCount Whether or not to return the number of error
-     *
-     * @return bool|int Either true/false if the job has some error or not, or the number of errors if $returnCount == true
-     */
-    public function hasFailedLogs($returnCount = false) {
-        $c = $this->xpdo->newQuery('modCronjobLog');
-        $c->where(array(
-            'cronjob' => $this->get('id'),
-            'error' => true,
-        ));
-
-        $total = $this->xpdo->getCount('modCronjobLog', $c);
-
-        if ($returnCount) return $total;
-        return ($total > 0);
-    }
-
-    public function display() {
+    public function display()
+    {
         $data = $this->toArray();
         $data['logs'] = $this->countLogs();
         $data['logs_error'] = $this->countLogs(true);

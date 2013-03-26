@@ -47,5 +47,5 @@ if ($object->xpdo && ($options[xPDOTransport::PACKAGE_ACTION] || $options[xPDOTr
     }
 
     // Update the version setting
-    $migration->setCurrentVersion($thisVersion);
+    $migration->setVersion($thisVersion);
 }

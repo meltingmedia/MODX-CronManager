@@ -9,21 +9,6 @@
 CronManager.panel.Home = function(config) {
     config = config || {};
 
-//    var bar = new Ext.ProgressBar({
-//        width: 300
-//    });
-//    bar.wait({
-//        interval: 200
-//        ,duration: 5000
-//        ,increment: (5000 / 200)
-//        ,animate: true
-//        ,fn: function() {
-//            //console.log(this);
-//            this.updateProgress(1, '', true);
-//            console.log('done');
-//        }
-//    });
-
     Ext.apply(config, {
         border: false
         ,unstyled: true
@@ -45,9 +30,44 @@ CronManager.panel.Home = function(config) {
                 html: _('cronmanager.cronjobs_desc')
                 ,bodyCssClass: 'panel-desc'
                 ,border: false
-            }, /*bar,*/ {
-                xtype: 'cronmanager-grid-cronjobs'
-                ,cls: 'main-wrapper'
+            },{
+                xtype: 'panel'
+                ,layout: 'card'
+                ,activeItem: 0
+                ,id: 'cm-cardpanel'
+                ,unstyled: true
+                ,items: [{
+                    xtype: 'cronmanager-grid-cronjobs'
+                    ,cls: 'main-wrapper'
+                    ,homePanel: this
+                },{
+                    xtype: 'cronmanager-panel-edit'
+                    ,cls: 'main-wrapper'
+                    ,unstyled: true
+                    ,baseParams: {
+                        action: 'mgr/cronjobs/create'
+                    }
+                    ,bbar: ['->', {
+                        text: _('save')
+                        ,handler: function() {
+                            this.addCron();
+                        }
+                        ,scope: this
+                    },'-',{
+                        text: _('cronmanager.cancel')
+                        ,handler: function() {
+                            this.switchTab(0);
+                        }
+                        ,scope: this
+                    }]
+                    ,listeners: {
+                        success: function(r) {
+                            this.switchTab(0);
+                            Ext.getCmp('cronmanager-grid-cronjobs').refresh();
+                        }
+                        ,scope: this
+                    }
+                }]
             }]
         }]
     });
@@ -66,6 +86,29 @@ Ext.extend(CronManager.panel.Home, MODx.Panel, {
             }]
         });
         modAB.doLayout();
+
+        this.cardPanel = Ext.getCmp('cm-cardpanel');
+        this.formPanel = this.cardPanel.items.get(1);
+    }
+
+    ,switchTab: function(id) {
+        this.cardPanel.getLayout().setActiveItem(id);
+        if (id === 1) {
+            // Set defaults to the form
+            this.formPanel.getForm().setValues({
+                snippet: ''
+                ,minutes: 60
+                ,properties: ''
+                ,active: false
+            });
+        }
+        this.cardPanel.items.get(id).el.slideIn('r', {
+            duration: .2
+        })
+    }
+
+    ,addCron: function() {
+        this.formPanel.submit();
     }
 });
 Ext.reg('cronmanager-panel-home', CronManager.panel.Home);
