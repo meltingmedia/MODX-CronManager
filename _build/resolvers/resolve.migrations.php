@@ -1,12 +1,15 @@
 <?php
 
-if ($object->xpdo && ($options[xPDOTransport::PACKAGE_ACTION] || $options[xPDOTransport::ACTION_UPGRADE])) {
+if ($object->xpdo and (
+    $options[xPDOTransport::PACKAGE_ACTION] == xPDOTransport::ACTION_INSTALL
+        or $options[xPDOTransport::PACKAGE_ACTION] == xPDOTransport::ACTION_UPGRADE)
+) {
     /** @var $modx modX */
     $modx =& $object->xpdo;
     $rootPath = $modx->getOption('cronmanager.core_path', null, $modx->getOption('core_path') . 'components/cronmanager/');
     $modelPath = $rootPath . 'model/';
 
-    $loaded = $modx->loadClass('migration', $modelPath . 'migration/', true, true);
+    $loaded = $modx->loadClass('Migration', $modelPath . 'migration/', true, true);
     $migration = new Migration($modx, array(
         'component_name' => PKG_NAME_LOWER,
         'package_name' => PKG_NAME_LOWER,
@@ -38,7 +41,7 @@ if ($object->xpdo && ($options[xPDOTransport::PACKAGE_ACTION] || $options[xPDOTr
             $modx->log(modX::LOG_LEVEL_INFO, 'Previous version : '. $previousVersion);
 
             // Lets trigger appropriate "migrations"
-            $for = '1.2.0-beta';
+            $for = '1.1.5-beta';
             if (version_compare($previousVersion, $for) <= 0) {
                 include_once $migration->getMigration($for);
             }

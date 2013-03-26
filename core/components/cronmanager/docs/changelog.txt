@@ -1,7 +1,9 @@
 Changelog file for Cron Manager component.
 
-Cron Manager 1.2.0
+Cron Manager 1.1.5-beta
 ====================================
+- fixed issue when newly added jobs were executed event if not activated
+- brand new UI
 - class based controllers + ExtJS cleanup
 - meta data for mysql + map files update
 - Optimised query to count logs

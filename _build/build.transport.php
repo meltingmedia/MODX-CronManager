@@ -6,7 +6,7 @@ set_time_limit(0);
 
 define('PKG_NAME', 'CronManager');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '1.2.0');
+define('PKG_VERSION', '1.1.5');
 define('PKG_RELEASE', 'beta');
 
 /* define build paths */
@@ -72,9 +72,6 @@ $modx->log(modX::LOG_LEVEL_INFO,'Adding in PHP resolvers...');
 $vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'resolve.migrations.php',
 ));
-//$vehicle->resolve('php',array(
-//    'source' => $sources['resolvers'] . 'cleanup.php',
-//));
 
 $builder->putVehicle($vehicle);
 unset($vehicle,$menu);

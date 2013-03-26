@@ -1,7 +1,7 @@
 <?php
 
 define('PKG_NAME', 'CronManager');
-define('PKG_NAME_LOWER', 'cronmanager');
+define('PKG_NAME_LOWER', strtolower(PKG_NAME));
 
 require_once dirname(__FILE__).'/build.config.php';
 include_once MODX_CORE_PATH . 'model/modx/modx.class.php';
@@ -11,7 +11,7 @@ $modx->initialize('mgr');
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $modx->setLogLevel(modX::LOG_LEVEL_INFO);
 $modx->setLogTarget('HTML');
- 
+
 $root = dirname(dirname(__FILE__)).'/';
 $sources = array(
     'model' => $root.'core/components/'.PKG_NAME_LOWER.'/model/',
@@ -19,15 +19,15 @@ $sources = array(
 );
 $manager = $modx->getManager();
 $generator = $manager->getGenerator();
- 
+
 if(!is_dir($sources['model'])) {
-	$modx->log(modX::LOG_LEVEL_ERROR,'Model directory not found!');
-	die();
+    $modx->log(modX::LOG_LEVEL_ERROR,'Model directory not found!');
+    die();
 }
 
 if(!file_exists($sources['schema_file'])) {
-	$modx->log(modX::LOG_LEVEL_ERROR,'Schema file not found!');
-	die();
+    $modx->log(modX::LOG_LEVEL_ERROR,'Schema file not found!');
+    die();
 }
 
 $generator->parseSchema($sources['schema_file'], $sources['model']);
@@ -35,5 +35,3 @@ $generator->parseSchema($sources['schema_file'], $sources['model']);
 $modx->addPackage(PKG_NAME_LOWER, $sources['model']);
 $manager->createObjectContainer('modCronjob');
 $manager->createObjectContainer('modCronjobLog');
-
-?>
