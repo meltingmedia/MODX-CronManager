@@ -14,9 +14,14 @@ class modCronjobGetListProcessor extends modObjectGetListProcessor {
             $this->modx->getSelectColumns('modSnippet', 'Snippet', 'snippet_', array('id', 'name', 'description')),
             'logs' => 'COUNT(Log.id)'
         ));
+
+        return $c;
+    }
+
+    public function prepareQueryAfterCount(xPDOQuery $c) {
         $c->groupby($this->defaultSortField, $this->defaultSortDirection);
 
-        return parent::prepareQueryBeforeCount($c);
+        return $c;
     }
 
     public function prepareRow(xPDOObject $object) {
