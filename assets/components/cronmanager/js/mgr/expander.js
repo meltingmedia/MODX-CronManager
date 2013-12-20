@@ -117,6 +117,24 @@ Ext.ux.grid.RowPanelExpander = Ext.extend(Ext.util.Observable, {
         grid.on('destroy', this.onDestroy, this);
         grid.on('beforestaterestore', this.applyState, this);
         grid.on('beforestatesave', this.saveState, this);
+
+        grid.on('resize', function() {
+            this.resizePanels();
+        }, this);
+    }
+
+
+    ,resizePanels: function() {
+        var width = (this.grid.getWidth()  - 32)
+            ,panels = this.expandingRowPanel;
+        if (panels && panels.length > 0) {
+            Ext.each(panels, function(panel, idx, list) {
+                if (undefined === panel || null === panel) return '';
+                //console.log(panel);
+                panel.setWidth(width);
+                panel.doLayout();
+            })
+        }
     }
 
     // @private

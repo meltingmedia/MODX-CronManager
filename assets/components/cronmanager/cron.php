@@ -26,7 +26,14 @@ $c->where(array(
 
 // get all cronjobs wich needs to be runned
 $cronjobs = $modx->getCollection('modCronjob', $c);
-/** @var modCronjob $cronjob */
+
+/** @type modCronjob $cronjob */
+foreach($cronjobs as $cronjob) {
+    $cronjob->set('nextrun', date('Y-m-d H:i:s', (strtotime($rundatetime)+($cronjob->get('minutes')*60))));
+    $cronjob->save();
+}
+
+/** @type modCronjob $cronjob */
 foreach($cronjobs as $cronjob) {
 
     $properties = $cronjob->get('properties');
@@ -87,7 +94,7 @@ foreach($cronjobs as $cronjob) {
     $logs[] = $log;
 
     $cronjob->set('lastrun', $rundatetime);
-    $cronjob->set('nextrun', date('Y-m-d H:i:s', (strtotime($rundatetime)+($cronjob->get('minutes')*60))));
+    //$cronjob->set('nextrun', date('Y-m-d H:i:s', (strtotime($rundatetime)+($cronjob->get('minutes')*60))));
     $cronjob->addMany($logs);
     $cronjob->save();
 }
