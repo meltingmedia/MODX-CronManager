@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/model/cronmanager/cronmanager.class.php';
+//require_once dirname(__FILE__) . '/model/cronmanager/cronmanager.class.php';
 
 abstract class CronManagerManagerController extends modExtraManagerController
 {
@@ -11,7 +11,8 @@ abstract class CronManagerManagerController extends modExtraManagerController
 
     public function initialize()
     {
-        $this->cronmanager = new CronManager($this->modx);
+        $path = $this->modx->getOption('cronmanager.core_path', null, $this->modx->getOption('core_path') . 'components/cronmanager/');
+        $this->cronmanager = $this->modx->getService('cronmanager', 'model.cronmanager.CronManager', $path);
         $this->jsURL = $this->cronmanager->config['jsUrl'];
         $this->cssURL = $this->cronmanager->config['cssUrl'];
         $this->loadBase();
@@ -25,13 +26,19 @@ abstract class CronManagerManagerController extends modExtraManagerController
         $this->addJavascript($this->jsURL . 'mgr/combos.js');
         $this->addJavascript($this->jsURL . 'mgr/expander.js');
 
-        $this->addHtml('<script type="text/javascript">
-        Ext.ns("CronManager");
-        Ext.onReady(function() {
-            CronManager.config = '. $this->modx->toJSON($this->cronmanager->config) .';
-            CronManager.action = "'. (!empty($_REQUEST['a']) ? $_REQUEST['a'] : 0) .'";
-        });
-        </script>');
+        $action = !empty($_REQUEST['a']) ? $_REQUEST['a'] : 0;
+
+        $this->addHtml(
+<<<HTML
+<script type="text/javascript">
+    Ext.ns('CronManager');
+    Ext.onReady(function() {
+        CronManager.config = {$this->modx->toJSON($this->cronmanager->config)};
+        CronManager.action = "{$action}";
+    });
+</script>
+HTML
+        );
     }
 
     public function getLanguageTopics()
