@@ -23,6 +23,36 @@ class modCronjob extends xPDOSimpleObject
         return $this->xpdo->getCount('modCronjobLog', $c);
     }
 
+    /**
+     * Calculate the next run date
+     */
+    public function incrementNextRun()
+    {
+        $next = $this->get('nextrun');
+        if (empty($next)) {
+            $this->xpdo->log(modX::LOG_LEVEL_INFO, '[modCronjob::incrementNextRun] no next run found, considering it to be right now');
+            $next = date('Y-m-d H:i:s');
+        }
+        $this->xpdo->log(
+            modX::LOG_LEVEL_INFO,
+            '[modCronjob::incrementNextRun] current run should have been executed on '. $next . ' currently '. date('Y-m-d H:i:s')
+        );
+        $next = strtotime($next);
+        $delay = $this->get('minutes') * 60;
+
+        $newRun = $next + $delay;
+        if ($newRun < time()) {
+            $this->xpdo->log(
+                modX::LOG_LEVEL_INFO,
+                '[modCronjob::incrementNextRun] next run is in the past, fixing it...'
+            );
+            $newRun = time() + $delay;
+        }
+
+        $this->set('nextrun', date('Y-m-d H:i:s', $newRun));
+        $this->save();
+    }
+
     public function display()
     {
         $data = $this->toArray();
