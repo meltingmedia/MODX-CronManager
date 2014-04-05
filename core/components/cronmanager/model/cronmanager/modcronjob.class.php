@@ -6,6 +6,8 @@ class modCronjob extends xPDOSimpleObject
     /**
      * Counts the number of logs for this job
      *
+     * @param bool $errors - Whether or not to only display logs with errors
+     *
      * @return int
      */
     public function countLogs($errors = false)
@@ -25,17 +27,23 @@ class modCronjob extends xPDOSimpleObject
 
     /**
      * Calculate the next run date
+     *
+     * @return void
      */
     public function incrementNextRun()
     {
         $next = $this->get('nextrun');
         if (empty($next)) {
-            $this->xpdo->log(modX::LOG_LEVEL_INFO, '[modCronjob::incrementNextRun] no next run found, considering it to be right now');
+            $this->xpdo->log(
+                modX::LOG_LEVEL_INFO,
+                '[modCronjob::incrementNextRun] No next run found, considering it to be right now'
+            );
             $next = date('Y-m-d H:i:s');
         }
         $this->xpdo->log(
             modX::LOG_LEVEL_INFO,
-            '[modCronjob::incrementNextRun] current run should have been executed on '. $next . ' currently '. date('Y-m-d H:i:s')
+            '[modCronjob::incrementNextRun] Current run should have been executed on '. $next . ' currently '.
+            date('Y-m-d H:i:s')
         );
         $next = strtotime($next);
         $delay = $this->get('minutes') * 60;
@@ -44,7 +52,7 @@ class modCronjob extends xPDOSimpleObject
         if ($newRun < time()) {
             $this->xpdo->log(
                 modX::LOG_LEVEL_INFO,
-                '[modCronjob::incrementNextRun] next run is in the past, fixing it...'
+                '[modCronjob::incrementNextRun] Next run is in the past, fixing it...'
             );
             $newRun = time() + $delay;
         }
@@ -53,6 +61,11 @@ class modCronjob extends xPDOSimpleObject
         $this->save();
     }
 
+    /**
+     * Display all information about this job
+     *
+     * @return array
+     */
     public function display()
     {
         $data = $this->toArray();
