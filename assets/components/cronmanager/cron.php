@@ -10,7 +10,6 @@ require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
 require_once MODX_CONNECTORS_PATH.'index.php';
 
 $corePath = $modx->getOption('cronmanager.core_path', null, $modx->getOption('core_path') . 'components/cronmanager/');
-//require_once $corePath.'model/cronmanager/cronmanager.class.php';
 
 /** @var CronManager $cm */
 $cm = $modx->getService('cronmanager', 'model.cronmanager.CronManager', $corePath);
@@ -29,14 +28,11 @@ $c->where(array(
     ),
 ));
 
-// get all cronjobs which needs to run
+// Get all cronjobs which needs to run
 $cronjobs = $modx->getIterator('modCronjob', $c);
 
 /** @type modCronjob $cronjob */
 foreach ($cronjobs as $cronjob) {
-//    $nextRun = (strtotime($rundatetime) + ( $cronjob->get('minutes') * 60 ) );
-//    $cronjob->set('nextrun', date('Y-m-d H:i:s', $nextRun));
-//    $cronjob->save();
     $cronjob->incrementNextRun();
 }
 
@@ -46,20 +42,20 @@ foreach ($cronjobs as $cronjob) {
     $properties = $cronjob->get('properties');
 
     if (!empty($properties)) {
-        // try to get a property set
+        // Try to get a property set
         /** @var modPropertySet $propset */
         $propset = $modx->getObject('modPropertySet', array('name' => $properties));
 
         if (!empty($propset) && is_object($propset) && $propset instanceof modPropertySet) {
             $properties = $propset->getProperties();
         } elseif (substr($properties, 0, 1) == '{' && substr($properties, (strlen($properties)-1), 1) == '}') {
-            // try if it is a json object
+            // Check if it is a json object
             $props = $modx->fromJSON($properties);
             if (!empty($props) && is_array($props)) {
                 $properties = $props;
             }
         } else {
-            // then must be it a key value pair group
+            // Then must be it a key value pair group
             $lines = explode("\n", $properties);
             $properties = array();
             foreach ($lines as $line) {
@@ -68,7 +64,7 @@ foreach ($cronjobs as $cronjob) {
             }
         }
     } else {
-        // when empty, make it an array
+        // When empty, make it an array
         $properties = array();
     }
 
@@ -90,7 +86,7 @@ foreach ($cronjobs as $cronjob) {
         $response['message'] = $msg;
     }
 
-    // add log run
+    // Add log run
     $logs = array();
     /** @var modCronjobLog $log */
     $log = $modx->newObject('modCronjobLog');
@@ -99,7 +95,6 @@ foreach ($cronjobs as $cronjob) {
     $logs[] = $log;
 
     $cronjob->set('lastrun', date('Y-m-d H:i:s'));
-    //$cronjob->set('nextrun', date('Y-m-d H:i:s', (strtotime($rundatetime)+($cronjob->get('minutes')*60))));
     $cronjob->addMany($logs);
     $cronjob->save();
 }
