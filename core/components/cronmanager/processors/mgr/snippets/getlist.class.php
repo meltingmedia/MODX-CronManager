@@ -1,14 +1,18 @@
 <?php
-require_once (MODX_CORE_PATH . 'model/modx/processors/element/snippet/getlist.class.php');
-class modCronjobSnippetGetListProcessor extends modSnippetGetListProcessor {
 
-    public function prepareQueryBeforeCount(xPDOQuery $c) {
-        $c->leftJoin('modCategory','Category');
+require_once (MODX_CORE_PATH . 'model/modx/processors/element/snippet/getlist.class.php');
+
+class modCronjobSnippetGetListProcessor extends modSnippetGetListProcessor
+{
+
+    public function prepareQueryBeforeCount(xPDOQuery $c)
+    {
+        $c->leftJoin('modCategory', 'Category');
 
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where(array(
-                'name:LIKE' => '%'.$query.'%',
+                'modSnippet.name:LIKE' => '%'.$query.'%',
                 'OR:Category.category:LIKE' => '%'.$query.'%',
             ));
         }

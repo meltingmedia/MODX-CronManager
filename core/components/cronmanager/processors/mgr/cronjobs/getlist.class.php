@@ -1,12 +1,15 @@
 <?php
-class modCronjobGetListProcessor extends modObjectGetListProcessor {
+
+class modCronjobGetListProcessor extends modObjectGetListProcessor
+{
     public $classKey = 'modCronjob';
     public $languageTopics = array('cronmanager:default');
     public $objectType = 'cronmanager.modcronjob';
     public $defaultSortField = 'snippet';
     public $defaultSortDirection = 'ASC';
 
-    public function prepareQueryBeforeCount(xPDOQuery $c) {
+    public function prepareQueryBeforeCount(xPDOQuery $c)
+    {
         $c->leftJoin('modSnippet', 'Snippet');
         $c->leftJoin('modCronjobLog', 'Log');
         $c->select(array(
@@ -18,13 +21,15 @@ class modCronjobGetListProcessor extends modObjectGetListProcessor {
         return $c;
     }
 
-    public function prepareQueryAfterCount(xPDOQuery $c) {
+    public function prepareQueryAfterCount(xPDOQuery $c)
+    {
         $c->groupby($this->defaultSortField, $this->defaultSortDirection);
 
         return $c;
     }
 
-    public function prepareRow(xPDOObject $object) {
+    public function prepareRow(xPDOObject $object)
+    {
         /** @var modCronJob $object */
         return $object->display();
     }

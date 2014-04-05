@@ -9,14 +9,12 @@ require_once MODX_CONNECTORS_PATH.'index.php';
  */
 
 $corePath = $modx->getOption('cronmanager.core_path', null, $modx->getOption('core_path') . 'components/cronmanager/');
-//require_once $corePath.'model/cronmanager/cronmanager.class.php';
-//$modx->cronmanager = new CronManager($modx);
 /** @var CronManager $cm */
 $cm = $modx->getService('cronmanager', 'model.cronmanager.CronManager', $corePath);
 
 $modx->lexicon->load('cronmanager:default');
 
-/* handle request */
+// Handle request
 $path = $modx->getOption('processorsPath', $cm->config, $corePath . 'processors/');
 $modx->request->handleRequest(array(
     'processors_path' => $path,

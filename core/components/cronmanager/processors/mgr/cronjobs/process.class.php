@@ -11,12 +11,10 @@ class RunNow extends modProcessor
     {
         $id = $this->getProperty('id');
         if (!$id) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, 'id');
             return $this->failure('No job ID given');
         }
         $this->job = $this->modx->getObject('modCronjob', $id);
         if (!$this->job || !($this->job instanceof modCronjob)) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Job not found, sorry');
             return $this->failure('Job not found, sorry');
         }
         $this->executeJob();
@@ -30,12 +28,14 @@ class RunNow extends modProcessor
 
         $properties = $this->job->get('properties');
         if (!empty($properties)) {
-            // try to get a propertyset
+            // Try to get a propertyset
             /** @var modPropertySet $propset */
-            $propset = $this->modx->getObject('modPropertySet', array('name' => $properties));
+            $propset = $this->modx->getObject('modPropertySet', array(
+                'name' => $properties,
+            ));
             if (!empty($propset) && is_object($propset) && $propset instanceof modPropertySet) {
                 $properties = $propset->getProperties();
-            } else if(substr($properties, 0, 1) == '{' && substr($properties, (strlen($properties)-1), 1) == '}') {
+            } elseif (substr($properties, 0, 1) == '{' && substr($properties, (strlen($properties)-1), 1) == '}') {
                 $props = $this->modx->fromJSON($properties);
                 if (!empty($props) && is_array($props)) {
                     $properties = $props;

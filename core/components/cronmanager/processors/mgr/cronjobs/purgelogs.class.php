@@ -1,13 +1,17 @@
 <?php
-class modCronjobLogPurgeProcessor extends modObjectGetListProcessor {
+
+class modCronjobLogPurgeProcessor extends modObjectGetListProcessor
+{
     public $classKey = 'modCronjobLog';
     public $languageTopics = array('cronmanager:default');
     public $objectType = 'cronmanager.modcronjoblog';
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'DESC';
 
-    public function process() {
+    public function process()
+    {
         $msg = $this->purge();
+
         return $this->success($msg);
     }
 
@@ -16,7 +20,8 @@ class modCronjobLogPurgeProcessor extends modObjectGetListProcessor {
      *
      * @return array The criteria
      */
-    public function getCriteria() {
+    public function getCriteria()
+    {
         $criteria = array();
         $cronjob = $this->getProperty('cronjob');
         if (!$cronjob) {
@@ -36,11 +41,14 @@ class modCronjobLogPurgeProcessor extends modObjectGetListProcessor {
      *
      * @return string The result :)
      */
-    public function purge() {
+    public function purge()
+    {
         $total = $this->modx->removeCollection($this->classKey, $this->getCriteria());
 
         if ($total >= 1) {
-            $response = $this->modx->lexicon('cronmanager.logs_purge_success', array('total' => $total));
+            $response = $this->modx->lexicon('cronmanager.logs_purge_success', array(
+                'total' => $total,
+            ));
         } else {
             $response = $this->modx->lexicon('cronmanager.logs_purge_nothing');
         }

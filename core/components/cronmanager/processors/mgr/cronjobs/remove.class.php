@@ -1,5 +1,7 @@
 <?php
-class modCronjobRemoveProcessor extends modObjectRemoveProcessor {
+
+class modCronjobRemoveProcessor extends modObjectRemoveProcessor
+{
     public $classKey = 'modCronjob';
     public $languageTopics = array('cronmanager:default');
     public $objectType = 'cronmanager.modcronjob';

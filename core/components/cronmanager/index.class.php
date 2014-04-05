@@ -1,17 +1,27 @@
 <?php
 
-//require_once dirname(__FILE__) . '/model/cronmanager/cronmanager.class.php';
-
 abstract class CronManagerManagerController extends modExtraManagerController
 {
-    /** @var CronManager $cronmanager */
+    /**
+     * @var CronManager $cronmanager
+     */
     public $cronmanager;
+    /**
+     * @var string
+     */
     public $jsURL;
+    /**
+     * @var string
+     */
     public $cssURL;
 
     public function initialize()
     {
-        $path = $this->modx->getOption('cronmanager.core_path', null, $this->modx->getOption('core_path') . 'components/cronmanager/');
+        $path = $this->modx->getOption(
+            'cronmanager.core_path',
+            null,
+            $this->modx->getOption('core_path') . 'components/cronmanager/'
+        );
         $this->cronmanager = $this->modx->getService('cronmanager', 'model.cronmanager.CronManager', $path);
         $this->jsURL = $this->cronmanager->config['jsUrl'];
         $this->cssURL = $this->cronmanager->config['cssUrl'];
@@ -44,6 +54,11 @@ HTML
     public function getLanguageTopics()
     {
         return array('cronmanager:default');
+    }
+
+    public function getPageTitle()
+    {
+        return $this->modx->lexicon('cronmanager');
     }
 }
 
