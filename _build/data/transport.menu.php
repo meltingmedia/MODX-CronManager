@@ -8,7 +8,6 @@ $action->fromArray(array(
     'controller' => 'index',
     'haslayout' => true,
     'lang_topics' => 'cronmanager:default',
-    'assets' => '',
 ), '', true, true);
 
 $menu= $modx->newObject('modMenu');
@@ -17,13 +16,8 @@ $menu->fromArray(array(
     'parent' => 'components',
     'description' => 'cronmanager.desc',
     'icon' => 'images/icons/plugin.gif',
-    'menuindex' => 0,
-    'params' => '',
-    'handler' => '',
-),'',true,true);
+), '', true, true);
 $menu->addOne($action);
 unset($menus);
 
 return $menu;
-
-?>

@@ -1,5 +1,15 @@
 Changelog file for Cron Manager component.
 
+Cron Manager 1.1.6-dev2
+====================================
+- Fixed issue were jobs were not run due to getIterator instead of getCollection
+- Prevent modMenu upgrade (in case menu have been moved out of "components" parent)
+
+Cron Manager 1.1.6-dev
+====================================
+- Code cleanup
+- Setting next run before each job is run
+
 Cron Manager 1.1.5-beta2
 ====================================
 - Fixes

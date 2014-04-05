@@ -28,16 +28,26 @@ $c->where(array(
     ),
 ));
 
+$total = $modx->getCount('modCronjob', $c);
+if ($total < 1) {
+    // No need to process
+    return;
+}
+
 // Get all cronjobs which needs to run
-$cronjobs = $modx->getIterator('modCronjob', $c);
+$cronjobs = $modx->getCollection('modCronjob', $c);
+$modx->log(modX::LOG_LEVEL_INFO, "Found {$total} job(s) to be processed");
 
 /** @type modCronjob $cronjob */
 foreach ($cronjobs as $cronjob) {
     $cronjob->incrementNextRun();
 }
 
-/** @type modCronjob $cronjob */
-foreach ($cronjobs as $cronjob) {
+$modx->log(modX::LOG_LEVEL_INFO, "Job(s) next runs incremented, now processing...");
+
+foreach ($cronjobs as $idx => $cronjob) {
+    $rank = $idx + 1 .' of '. $total;
+    $modx->log(modX::LOG_LEVEL_INFO, "... job {$rank}...");
 
     $properties = $cronjob->get('properties');
 
@@ -98,3 +108,5 @@ foreach ($cronjobs as $cronjob) {
     $cronjob->addMany($logs);
     $cronjob->save();
 }
+
+$modx->log(modX::LOG_LEVEL_INFO, "... processing complete");

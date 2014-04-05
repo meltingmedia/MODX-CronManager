@@ -57,7 +57,13 @@ class modCronjob extends xPDOSimpleObject
             $newRun = time() + $delay;
         }
 
-        $this->set('nextrun', date('Y-m-d H:i:s', $newRun));
+        $newRun = date('Y-m-d H:i:s', $newRun);
+        $this->xpdo->log(
+            modX::LOG_LEVEL_INFO,
+            '[modCronjob::incrementNextRun] Next run is scheduled for '. $newRun
+        );
+
+        $this->set('nextrun', $newRun);
         $this->save();
     }
 
