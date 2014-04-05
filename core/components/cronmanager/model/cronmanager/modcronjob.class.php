@@ -105,4 +105,118 @@ class modCronjob extends xPDOSimpleObject
 
         return $data;
     }
+
+    /**
+     * Process the job
+     *
+     * @param string $runDate
+     *
+     * @return void
+     */
+    public function execute($runDate = '')
+    {
+        if (empty($runDate)) {
+            $runDate = date('Y-m-d H:i:s');
+        }
+
+        $response = $this->processSnippet();
+        $this->addLog($response, $runDate);
+
+        $this->set('lastrun', date('Y-m-d H:i:s'));
+        $this->save();
+    }
+
+    /**
+     * Wrapper method to execute the snippet
+     *
+     * @return array
+     */
+    protected function processSnippet()
+    {
+        $properties = $this->getProperties();
+
+        /** @var modSnippet $snippet */
+        $snippet = $this->getOne('Snippet');
+        /**
+         * The snippet should return a json array :
+         * array('error' => boolean, 'message' => string)
+         * If not, the default output will be transformed
+         *
+         * This will allow to define if an error occurred and ease the process of filtering logs
+         */
+        $response = $snippet->process($properties);
+        if (substr($response, 0, 1) == '{' && substr($response, (strlen($response)-1), 1) == '}') {
+            $response = json_decode($response, true);
+        } else {
+            $msg = $response;
+            $response = array();
+            $response['message'] = $msg;
+        }
+
+        return $response;
+    }
+
+    /**
+     * Add the result as log
+     *
+     * @param array $response - The snippet response
+     * @param string $runDate
+     *
+     * @return void
+     */
+    public function addLog(array $response, $runDate = '')
+    {
+        if (empty($runDate)) {
+            $runDate = date('Y-m-d H:i:s');
+        }
+        $logs = array();
+        /** @var modCronjobLog $log */
+        $log = $this->xpdo->newObject('modCronjobLog');
+        $log->fromArray($response);
+        $log->set('logdate', $runDate);
+        $logs[] = $log;
+
+        $this->addMany($logs);
+    }
+
+    /**
+     * Get the snippet properties, if any
+     *
+     * @return array
+     */
+    public function getProperties()
+    {
+        $properties = $this->get('properties');
+
+        if (!empty($properties)) {
+            // Try to get a property set
+            /** @var modPropertySet $propset */
+            $propset = $this->xpdo->getObject('modPropertySet', array(
+                'name' => $properties,
+            ));
+
+            if (!empty($propset) && is_object($propset) && $propset instanceof modPropertySet) {
+                $properties = $propset->getProperties();
+            } elseif (substr($properties, 0, 1) == '{' && substr($properties, (strlen($properties)-1), 1) == '}') {
+                // Check if it is a json object
+                $props = $this->xpdo->fromJSON($properties);
+                if (!empty($props) && is_array($props)) {
+                    $properties = $props;
+                }
+            } else {
+                // Then must be it a key value pair group
+                $lines = explode("\n", $properties);
+                $properties = array();
+                foreach ($lines as $line) {
+                    list($key, $value) = explode(':', $line);
+                    $properties[trim($key)] = trim($value);
+                }
+            }
+        } else {
+            // When empty, make it an array
+            $properties = array();
+        }
+
+        return $properties;
+    }
 }
