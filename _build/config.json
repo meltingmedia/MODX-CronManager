@@ -1,0 +1,16 @@
+{
+    "name": "CronManager"
+    ,"lowCaseName": "cronmanager"
+    ,"description": "Logging for MODX Revolution"
+    ,"author": "Bert Oost"
+    ,"version": "1.1.6-dev2"
+    ,"_build": {
+        "readme": ""
+        ,"license": ""
+        ,"changelog": ""
+    }
+    ,"extensionPackage": {
+        "serviceName": "monolog"
+        ,"serviceClass": "Monolog"
+    }
+}
