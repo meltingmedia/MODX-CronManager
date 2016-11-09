@@ -1,5 +1,9 @@
 <?php
 
+if (!class_exists('CronManagerManagerController')) {
+    require_once __DIR__ . '/../../index.class.php';
+}
+
 class CronManagerMgrViewLogManagerController extends CronManagerManagerController
 {
     public function loadCustomCssJs()
