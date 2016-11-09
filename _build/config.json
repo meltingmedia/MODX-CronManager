@@ -3,7 +3,7 @@
     ,"lowCaseName": "cronmanager"
     ,"description": "Cron jobs for MODX Revolution."
     ,"author": "Bert Oost"
-    ,"version": "1.1.6-dev2"
+    ,"version": "1.2.0-dev"
     ,"package": {
         "actions": [
             {

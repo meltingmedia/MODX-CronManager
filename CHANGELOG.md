@@ -11,18 +11,13 @@
 * Fixed issue were jobs were not run due to getIterator instead of getCollection
 * Prevent modMenu upgrade (in case menu have been moved out of "components" parent)
 
-## v1.1.6-dev
+## v1.1.6-dev - 2014-04-05
 
 * Code cleanup
 * Setting next run before each job is run
 
 
-## [v1.1.5-beta2] - 2013-03-26
-
-* Fixes
-
-
-## v1.1.5-beta
+## [v1.1.5-beta] - 2013-03-26
 
 * Fixed issue when newly added jobs were executed event if not activated
 * Brand new UI
@@ -33,14 +28,14 @@
 * Prevent timeouts when there is a lot of logs
 
 
-## v1.1.2-beta
+## v1.1.2-beta - 2012-12-14
 
 * Ability to filter snippets per category (combo box)
 * Added the number of logs of each job
 * Added snippet description in the grid
 
 
-## v1.1.1-beta
+## v1.1.1-beta - 2012-10-16
 
 * Fixed pagination when purging logs
 
@@ -69,6 +64,6 @@
 
 
 [unreleased]: https://github.com/meltingmedia/MODX-CronManager/compare/v1.1.6-dev2...HEAD
-[v1.1.6-dev2]: https://github.com/meltingmedia/MODX-CronManager/compare/v1.1.5-beta2...v1.1.6-dev2
-[v1.1.5-beta2]: https://github.com/meltingmedia/MODX-CronManager/compare/v1.1.0-pl...v1.1.5-beta2
+[v1.1.6-dev2]: https://github.com/meltingmedia/MODX-CronManager/compare/v1.1.5-beta...v1.1.6-dev2
+[v1.1.5-beta]: https://github.com/meltingmedia/MODX-CronManager/compare/v1.1.0-pl...v1.1.5-beta
 [v1.1.0-pl]: https://github.com/meltingmedia/MODX-CronManager/commits/v1.1.0-pl
