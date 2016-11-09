@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * @see modPackageGetAttributeProcessor::process
+ *
+ * @var modX $modx
+ * @var array $options
+ *
+ * @var array $attributes
+ * @var modPackageGetAttributeProcessor $this
+ */
 $output = '';
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
@@ -11,5 +19,3 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         break;
 }
 return $output;
-
-?>
