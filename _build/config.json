@@ -39,5 +39,8 @@
         ,"setupOptions":{
             "source": "setup.options.php"
         }
+        ,"readme": "../../../README.md"
+        ,"changelog": "../../../CHANGELOG.md"
+        ,"license": "../../../LICENSE"
     }
 }
